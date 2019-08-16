@@ -6,6 +6,8 @@
 #include <Psapi.h>
 #include <TlHelp32.h>
 #define MIN(a,b) (((a)<(b))?(a):(b))
+
+#define SCAN_SIZE (1024 * 1024) 
 BOOL SearchTrackOne(LPCSTR lpBuf, DWORD dwBuf, LPSTR *lpszDest) {
 	BOOL status = FALSE;
 	BOOL bFoundStartSentinel = FALSE, bFormatCode = FALSE, bPan = FALSE, bFirstFieldSeperator = FALSE, bSecondFieldSeperator = FALSE, bEndSentinel = FALSE;
@@ -86,6 +88,7 @@ BOOL SearchTrackOne(LPCSTR lpBuf, DWORD dwBuf, LPSTR *lpszDest) {
 		printf("we might have found a track2? \n\n\n\n%s\n\n\n\n", *lpszDest);
 		
 	}
+	return status;
 }
 
 BOOL SearchTrackTwo(LPCSTR lpBuf, DWORD dwBuf, LPSTR *lpszDest) {
@@ -162,9 +165,10 @@ BOOL SearchTrackTwo(LPCSTR lpBuf, DWORD dwBuf, LPSTR *lpszDest) {
 		memcpy(*lpszDest, lpBuf + (dwIndex - dwEnd) + 1, dwEnd);
 		printf("we might have found a track1? \n\n\n\n%s\n\n\n\n", *lpszDest);
 	}
+	return status;
 }
 
-DWORD GetModuleBase(char *lpModuleName, DWORD dwProcessId)
+DWORD GetModuleBase(WCHAR *lpModuleName, DWORD dwProcessId)
 {
 	MODULEENTRY32 lpModuleEntry = { 0 };
 	BOOL bModule;
@@ -180,7 +184,7 @@ DWORD GetModuleBase(char *lpModuleName, DWORD dwProcessId)
 
 	while (bModule)
 	{
-		if (!strcmp(lpModuleEntry.szModule, lpModuleName))
+		if (!wcscmp(lpModuleEntry.szModule, lpModuleName))
 		{
 			CloseHandle(hSnapShot);
 			return (DWORD)lpModuleEntry.modBaseAddr;
@@ -192,8 +196,8 @@ DWORD GetModuleBase(char *lpModuleName, DWORD dwProcessId)
 	return 0;
 }
 
-#define SCAN_SIZE (1024 * 1024) 
 BOOL FindTracks(HANDLE hProcess, DWORD lpAddress) {
+	BOOL status = FALSE;
 	DWORD lpMemoryAddress = lpAddress;
 	MEMORY_BASIC_INFORMATION MBI = { 0 };
 	SYSTEM_INFO SysInfo = { 0 };
@@ -208,11 +212,15 @@ BOOL FindTracks(HANDLE hProcess, DWORD lpAddress) {
 			dwScanSize = ((DWORD)MBI.BaseAddress + MBI.RegionSize) - dwScanSizeCurrent;
 			dwScanSize = MIN(dwScanSize, SCAN_SIZE);
 			if (dwScanSize <= 0) {
+				status = FALSE;
+
 				break;
 			}
 			PCHAR lpszMemory = HeapAlloc(GetProcessHeap(), 0, dwScanSize);
 			DWORD dwBytesRead = 0;
 			if (!lpszMemory) {
+				status = FALSE;
+
 				//
 				break;
 			}
@@ -230,6 +238,7 @@ BOOL FindTracks(HANDLE hProcess, DWORD lpAddress) {
 						//redacted 
 						HeapFree(GetProcessHeap(), 0, lpszDest);
 					}
+
 					dwScanSizeCurrent += dwBytesRead;
 				}
 				else {
@@ -239,11 +248,13 @@ BOOL FindTracks(HANDLE hProcess, DWORD lpAddress) {
 			else {
 				dwScanSizeCurrent += dwScanSize;
 			}
+
 			HeapFree(GetProcessHeap(), 0, lpszMemory);
 		}
 		lpMemoryAddress = ((DWORD)MBI.BaseAddress + MBI.RegionSize);
+		status = TRUE;
 	}
-
+	return status;
 }
 BOOL ScanForTracks() {
 	//
