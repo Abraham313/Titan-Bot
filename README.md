@@ -1,4 +1,10 @@
-Everything mentioned here is for eductional purposes and everything is purely fictional. I purposely redacted a lot of code and messed stuffs up since im a pussy.
+im slowly uploading the files :( im depressed 
+
+There is no copy of Zeus anywhere. The backconnect server supports multiple connections and is made in QT and supports proxy connections to the victim.
+
+Also all the drivers can be either signed on panel side (supports multiple EV certs) or you can have test mode.
+
+Everything mentioned here is for eductional purposes and everything is purely fictional. I purposely redacted a lot of code and messed stuffs up since im a pussy and dont want this to be used to cause any real harm.
 
 
 What is in here:
