@@ -61,3 +61,10 @@ In Conclusion:
 I am not reponsible for any financial losses or damages of any sort. This is all purely educational and I made this a long time ago.
 
 
+
+
+
+imgs:
+![](https://i.imgur.com/lNJqJ96.png)
+
+![](https://i.imgur.com/1s6KJ7O.png)
