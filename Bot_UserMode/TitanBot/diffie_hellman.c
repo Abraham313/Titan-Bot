@@ -272,12 +272,11 @@ BOOL Exchange_Keys(PUCHAR *dh_generator, PUCHAR *dh_prime, PCRYPTO_KEY pCryptoKe
 
 
 #endif
-	PCHAR lpszData = NULL;
 	DWORD dwData = 0;
 	if (!PostRequest(lpszPage, lpszHost, lpszContent, dwContentLength, &remote_pubkey_hex, &dwData, TRUE))
 		goto cleanup;
 	//get remote public key
-	remote_pubkey = hex_to_bytes(lpszData);
+	remote_pubkey = hex_to_bytes(remote_pubkey_hex);
 	if (remote_pubkey == NULL)
 	{
 #ifdef DEBUG_CODE
@@ -379,6 +378,13 @@ cleanup:
 	if (dh_hex_gen)
 		HeapFree(GetProcessHeap(), 0, dh_hex_gen);
 
+
+	if (remote_pubkey_hex)
+		HeapFree(GetProcessHeap(), 0, remote_pubkey_hex);
+	
+	if (remote_pubkey)
+		HeapFree(GetProcessHeap(), 0, remote_pubkey);
+	
 	if (Salt_hex)
 		HeapFree(GetProcessHeap(), 0, Salt_hex);
 
