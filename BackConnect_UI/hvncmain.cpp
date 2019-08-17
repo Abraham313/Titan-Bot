@@ -9,48 +9,7 @@
 #define PORT 420
 void hvncmain::onReadyRead()
 {
-    if(!configured){
-       // fix this read shit
-        tcpDesktop->read((char*)&width, sizeof(width));
-        tcpDesktop->read((char*)&height, sizeof(height));
-        configured = true;
-        bi.biSize = sizeof(BITMAPINFOHEADER);
-        bi.biWidth = width;
-        bi.biHeight = height;
-        bi.biPlanes = 1;
-        bi.biBitCount = 32; // 2^32 colors
-        bi.biCompression = BI_RGB;
-        bi.biSizeImage = 0;
-        bi.biXPelsPerMeter = 0;
-        bi.biYPelsPerMeter = 0;
-        bi.biClrUsed = 0;
-        bi.biClrImportant = 0;
-
-        dwBmpSize = ((bi.biWidth * bi.biBitCount + 31) / 32) * 4 * bi.biHeight;
-        dwSizeofDIB = dwBmpSize + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
-        bmfHeader.bfOffBits = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
-        bmfHeader.bfSize = dwSizeofDIB;
-        bmfHeader.bfType = 0x4D42;
-
-    }
-    int bytesRead = 0;
-    QByteArray lpBitmap;
-    while(tcpDesktop->bytesAvailable()){
-        bytesRead += tcpDesktop->bytesAvailable();
-        lpBitmap.append(tcpDesktop->readAll()); // we arent sending the struct data over
-        // so i dont need to use #pragma pack on the bi struct for alignment right?
-    }
-    if(bytesRead != dwBmpSize){
-        return;
-    }
-    if(!fullBitmap.isEmpty())
-        fullBitmap.clear();
-
-    fullBitmap.append((char*)&bmfHeader);
-    fullBitmap.append((char*)&bi);
-    fullBitmap.append(lpBitmap);
-    pixmap.loadFromData(fullBitmap, "BMP");
-
+// removed
 }
 hvncmain::hvncmain(QWidget *parent, QTcpSocket *tcpSocket[1]) : QWidget(parent)
 {
