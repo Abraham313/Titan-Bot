@@ -1,4 +1,4 @@
-im slowly uploading the files :( im depressed 
+contact me if your an actual researcher and i will give you the full code to analyze if you want
 
 There is no copy of Zeus anywhere. The backconnect server supports multiple connections and is made in QT and supports proxy connections to the victim.
 
@@ -47,12 +47,6 @@ Has server sided based polymorphism for driver.
 Register as service
 
 
-
-A purely fictional story:
-
-Why I am releasing the code? 
-
-I fell in love with someone and apparently they didnt feel the same way about me. So that being said i guess you can figure out what this is.
 
 
 
