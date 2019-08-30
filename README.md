@@ -61,4 +61,3 @@ I am not reponsible for any financial losses or damages of any sort. This is all
 imgs:
 ![](https://i.imgur.com/lNJqJ96.png)
 
-![](https://i.imgur.com/1s6KJ7O.png)
