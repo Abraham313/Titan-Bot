@@ -1,6 +1,6 @@
 contact me if your an actual researcher and i will give you the full code to analyze if you want
 
-There is no copy of Zeus anywhere. The backconnect server supports multiple connections and is made in QT and supports proxy connections to the victim.
+The backconnect server supports multiple connections and is made in QT and supports proxy connections to the victim.
 
 Also all the drivers can be either signed on panel side (supports multiple EV certs) or you can have test mode.
 
@@ -13,7 +13,7 @@ Kernel mode rootkit, does not trigger KPP, uses callbacks. redacted hidden VFS c
 
 UEFI based rootkit - from scratch does not use any public lib (i am not going to release this for personal purposes and also does not bypass secure boot)
 
-Kernel mode keylogger
+Kernel mode 
 
 
 Usermode Bot Features:
@@ -22,15 +22,14 @@ Send files to block access to driver.
 
 Send registry keys to block access to driver.
 
-Track Grabber 1/2
+Track  1/2
 
-Back Connect that can start: hidden desktop or reverse socks5 (UI made in QT)
+Back Connect that can start:  desktop or reverse socks5 (UI made in QT)
 
-Hidden Desktop - the actual code uses win32u undocumented functions
+ Desktop - the actual code uses win32u undocumented functions
 
 Reverse Socks5
 
-Formgrabber + webinjects for IE, FF, Chrome, Edge ( edge i  hijack and handle and inject)
 
 DH key exchange for AES.
 
@@ -52,12 +51,7 @@ Register as service
 
 In Conclusion:
 
-I am not reponsible for any financial losses or damages of any sort. This is all purely educational and I made this a long time ago.
+I am not reponsible for any losses or damages of any sort. This is all purely educational and I made this a long time ago.
 
 
-
-
-
-imgs:
-![](https://i.imgur.com/lNJqJ96.png)
 
